@@ -19,5 +19,13 @@ source .venv/bin/activate  # или .venv\Scripts\activate для Windows
 pip install -r requirements.txt
 python main.py
 
-Автор
+# Автор
+
 Студент группы Б1123-38.03.05 ба(2), ФИО: Огнева Полина Андреевна.
+
+# Планируемые метрики
+
+- Выручка по месяцам
+- Средняя выручка
+- Рентабельность, %
+- Рост выручки, %
