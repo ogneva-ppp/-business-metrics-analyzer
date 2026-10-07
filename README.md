@@ -12,16 +12,21 @@
 - pandas
 - matplotlib
 
-## Запуск
+## Инструкция по запуску
 
 python -m venv .venv
-source .venv/bin/activate  # или .venv\Scripts\activate для Windows
+
+source .venv/bin/activate   # или .venv\Scripts\activate для Windows
+
 pip install -r requirements.txt
+
 python main.py
 
 # Автор
 
-Студент группы Б1123-38.03.05 ба(2), ФИО: Огнева Полина Андреевна.
+Студент группы Б1123-38.03.05 ба(2)
+
+ФИО: Огнева Полина Андреевна
 
 # Планируемые метрики
 
