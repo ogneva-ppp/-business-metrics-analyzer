@@ -1,0 +1,32 @@
+@startuml
+left to right direction
+actor "Коммерческий директор" as CD
+actor "Менеджер по продажам" as MP
+actor "Аналитик" as AN
+actor "Администратор" as AD
+
+rectangle "Business Metrics Analyzer" {
+  usecase "Просмотр дашборда KPI" as UC1
+  usecase "Формирование отчёта" as UC2
+  usecase "Загрузка данных о продажах" as UC3
+  usecase "Экспорт отчёта в Excel" as UC4
+  usecase "Управление пользователями" as UC5
+  usecase "Настройка метрик" as UC6
+  usecase "Уведомления о KPI" as UC7
+}
+
+CD --> UC1
+CD --> UC2
+CD --> UC4
+CD --> UC7
+MP --> UC2
+MP --> UC3
+AN --> UC1
+AN --> UC2
+AN --> UC3
+AN --> UC4
+AD --> UC5
+AD --> UC6
+
+UC4 .> UC2 : <<include>>
+@enduml
