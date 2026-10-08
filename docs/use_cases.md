@@ -1,6 +1,6 @@
 # Use Case диаграмма и описание
 
-Диаграмма: `docs/use_case_diagram.png` (исходный код: `docs/use_case_diagram.puml`).
+Диаграмма: `docs/use_case_diagram.png`.
 
 ## Акторы
 
