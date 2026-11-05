@@ -1,0 +1,73 @@
+@startuml
+title Диаграмма компонентов Business Metrics Analyzer
+package "Presentation" {
+  [AuthController]
+  [SalesController]
+  [KpiController]
+  [ReportsController]
+}
+package "Application" {
+  [AuthService]
+  [SalesImportService]
+  [KpiService]
+  [ReportService]
+  [UserService]
+  [ReportFactory]
+  [DashboardObserver]
+}
+package "Domain" {
+  [Sale]
+  [Kpi]
+  [User]
+  [Report]
+  [KpiStrategy]
+  [Validators]
+}
+package "Infrastructure" {
+  [SqlSaleRepository]
+  [SqlUserRepository]
+  [UnitOfWork]
+  [JwtProvider]
+  [SalesSourceAdapter]
+  [RedisKpiCache]
+  [ExcelReportGenerator]
+  [PdfReportGenerator]
+  [EmailNotifier]
+}
+database "PostgreSQL" as DB
+cloud "Внешние сервисы" as EXT
+
+[AuthController] --> [AuthService]
+[SalesController] --> [SalesImportService]
+[KpiController] --> [KpiService]
+[ReportsController] --> [ReportService]
+
+[AuthService] --> [JwtProvider]
+[AuthService] --> [UserService]
+[UserService] --> [SqlUserRepository]
+
+[SalesImportService] --> [UnitOfWork]
+[SalesImportService] --> [SqlSaleRepository]
+[SalesImportService] --> [Validators]
+[SalesImportService] --> [SalesSourceAdapter]
+[SalesImportService] --> [DashboardObserver]
+[DashboardObserver] --> [KpiService]
+
+[KpiService] --> [KpiStrategy]
+[KpiService] --> [UnitOfWork]
+[KpiService] --> [SqlSaleRepository]
+[KpiService] --> [RedisKpiCache]
+
+[ReportService] --> [ReportFactory]
+[ReportFactory] --> [ExcelReportGenerator]
+[ReportFactory] --> [PdfReportGenerator]
+[ReportService] --> [EmailNotifier]
+[ReportService] --> [UnitOfWork]
+
+[SqlSaleRepository] --> DB
+[SqlUserRepository] --> DB
+[SalesSourceAdapter] --> EXT
+[ExcelReportGenerator] --> EXT
+[PdfReportGenerator] --> EXT
+[EmailNotifier] --> EXT
+@enduml
