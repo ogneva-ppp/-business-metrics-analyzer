@@ -1,0 +1,62 @@
+digraph ER {
+  graph [rankdir=TB, nodesep=1.1, ranksep=1.3, bgcolor=white];
+  node [shape=plaintext, fontname="DejaVu Sans", fontsize=11];
+  edge [dir=both, arrowtail=teetee, arrowhead=crowodot, penwidth=1.3, arrowsize=1.2, fontname="DejaVu Sans", fontsize=10];
+  users [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+   <TR><TD COLSPAN="3" BORDER="1" SIDES="B"><B>users</B></TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28">PK</TD><TD ALIGN="LEFT">id</TD><TD ALIGN="LEFT">  INTEGER</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28">U</TD><TD ALIGN="LEFT">username</TD><TD ALIGN="LEFT">  VARCHAR(50)</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28">U</TD><TD ALIGN="LEFT">email</TD><TD ALIGN="LEFT">  VARCHAR(100)</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">password_hash</TD><TD ALIGN="LEFT">  VARCHAR(255)</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">role</TD><TD ALIGN="LEFT">  VARCHAR(20)</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">created_at</TD><TD ALIGN="LEFT">  TIMESTAMP</TD></TR>
+  </TABLE>>];
+  products [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+   <TR><TD COLSPAN="3" BORDER="1" SIDES="B"><B>products</B></TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28">PK</TD><TD ALIGN="LEFT">id</TD><TD ALIGN="LEFT">  INTEGER</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">name</TD><TD ALIGN="LEFT">  VARCHAR(100)</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">category</TD><TD ALIGN="LEFT">  VARCHAR(50)</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">price</TD><TD ALIGN="LEFT">  NUMERIC(10,2)</TD></TR>
+  </TABLE>>];
+  sales [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+   <TR><TD COLSPAN="3" BORDER="1" SIDES="B"><B>sales</B></TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28">PK</TD><TD ALIGN="LEFT">id</TD><TD ALIGN="LEFT">  INTEGER</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">sale_date</TD><TD ALIGN="LEFT">  DATE</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">month</TD><TD ALIGN="LEFT">  VARCHAR(7)</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">revenue</TD><TD ALIGN="LEFT">  NUMERIC(12,2)</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">cost</TD><TD ALIGN="LEFT">  NUMERIC(12,2)</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">orders_count</TD><TD ALIGN="LEFT">  INTEGER</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28">FK</TD><TD ALIGN="LEFT">product_id</TD><TD ALIGN="LEFT">  INTEGER</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28">FK</TD><TD ALIGN="LEFT">manager_id</TD><TD ALIGN="LEFT">  INTEGER</TD></TR>
+  </TABLE>>];
+  reports [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+   <TR><TD COLSPAN="3" BORDER="1" SIDES="B"><B>reports</B></TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28">PK</TD><TD ALIGN="LEFT">id</TD><TD ALIGN="LEFT">  INTEGER</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">report_type</TD><TD ALIGN="LEFT">  VARCHAR(30)</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">period</TD><TD ALIGN="LEFT">  VARCHAR(7)</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">file_path</TD><TD ALIGN="LEFT">  VARCHAR(255)</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28">FK</TD><TD ALIGN="LEFT">created_by</TD><TD ALIGN="LEFT">  INTEGER</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">created_at</TD><TD ALIGN="LEFT">  TIMESTAMP</TD></TR>
+  </TABLE>>];
+  metric_settings [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+   <TR><TD COLSPAN="3" BORDER="1" SIDES="B"><B>metric_settings</B></TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28">PK</TD><TD ALIGN="LEFT">id</TD><TD ALIGN="LEFT">  INTEGER</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28">U</TD><TD ALIGN="LEFT">metric_name</TD><TD ALIGN="LEFT">  VARCHAR(50)</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">formula</TD><TD ALIGN="LEFT">  TEXT</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">is_active</TD><TD ALIGN="LEFT">  BOOLEAN</TD></TR>
+  </TABLE>>];
+  kpi [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4">
+   <TR><TD COLSPAN="3" BORDER="1" SIDES="B"><B>kpi</B></TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28">PK</TD><TD ALIGN="LEFT">id</TD><TD ALIGN="LEFT">  INTEGER</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">period</TD><TD ALIGN="LEFT">  VARCHAR(7)</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28">FK</TD><TD ALIGN="LEFT">metric_name</TD><TD ALIGN="LEFT">  VARCHAR(50)</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">value</TD><TD ALIGN="LEFT">  NUMERIC(12,4)</TD></TR>
+   <TR><TD ALIGN="LEFT" WIDTH="28"></TD><TD ALIGN="LEFT">calculated_at</TD><TD ALIGN="LEFT">  TIMESTAMP</TD></TR>
+  </TABLE>>];
+  users -> sales;
+  products -> sales;
+  users -> reports;
+  metric_settings -> kpi;
+  legend [label=<<TABLE BORDER="0" CELLSPACING="3"><TR><TD ALIGN="LEFT">PK - первичный ключ, FK - внешний ключ, U - уникальное поле. Связь «один ко многим»: черта у родительской таблицы, «воронья лапка» у дочерней.</TD></TR></TABLE>>, fontsize=10];
+  {rank=sink; legend}
+}
