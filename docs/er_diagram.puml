@@ -1,0 +1,78 @@
+@startuml
+title ER-диаграмма Business Metrics Analyzer
+hide circle
+skinparam shadowing false
+skinparam defaultFontName DejaVu Sans
+skinparam roundCorner 8
+skinparam entity {
+  BackgroundColor #F6F3EC
+  BorderColor #22485E
+  HeaderBackgroundColor #22485E
+  FontColor #22485E
+}
+skinparam ArrowColor #22485E
+
+entity "users" as user {
+  *id : integer <<PK>>
+  --
+  *username : varchar(50) <<UQ>>
+  *email : varchar(100) <<UQ>>
+  *password_hash : varchar(255)
+  *role : varchar(20)
+  *is_active : boolean
+  *created_at : timestamp
+}
+
+entity "products" as product {
+  *id : integer <<PK>>
+  --
+  *name : varchar(100)
+  *category : varchar(50)
+  *price : numeric(10,2)
+}
+
+entity "sales" as sale {
+  *id : integer <<PK>>
+  --
+  *sale_date : date
+  *month : varchar(7)
+  *revenue : numeric(12,2)
+  *cost : numeric(12,2)
+  *orders_count : integer
+  *product_id : integer <<FK>>
+  *manager_id : integer <<FK>>
+}
+
+entity "reports" as report {
+  *id : integer <<PK>>
+  --
+  *report_type : varchar(30)
+  *period : varchar(7)
+  file_path : varchar(255)
+  *created_by : integer <<FK>>
+  *created_at : timestamp
+}
+
+entity "metric_settings" as metric {
+  *id : integer <<PK>>
+  --
+  *metric_name : varchar(50) <<UQ>>
+  *formula : text
+  *is_active : boolean
+}
+
+entity "kpi" as kpi {
+  *id : integer <<PK>>
+  --
+  *period : varchar(7)
+  *metric_name : varchar(50) <<FK>>
+  *value : numeric(12,4)
+  *calculated_at : timestamp
+}
+
+user ||--o{ sale : "manager_id"
+sale -[hidden]- report
+product ||--o{ sale : "product_id"
+user ||--o{ report : "created_by"
+metric ||--o{ kpi : "metric_name"
+@enduml
