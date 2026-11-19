@@ -1,0 +1,17 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+LAYOUT_LEFT_RIGHT()
+Person(director, "Коммерческий директор", "Просматривает KPI и отчёты")
+Person(manager, "Менеджер по продажам", "Работает с данными продаж")
+Person(analyst, "Аналитик", "Формирует и экспортирует отчёты")
+Person(admin, "Администратор", "Управляет пользователями и метриками")
+System(bma, "Business Metrics Analyzer", "Веб-приложение для расчёта и визуализации KPI торговой компании")
+System_Ext(source, "Источник данных", "1С / CSV / Excel: данные о продажах")
+System_Ext(email, "Сервис уведомлений", "SMTP: отправка email")
+Rel(director, bma, "Просматривает KPI и отчёты", "HTTPS")
+Rel(manager, bma, "Работает с данными продаж", "HTTPS")
+Rel(analyst, bma, "Анализирует и экспортирует отчёты", "HTTPS")
+Rel(admin, bma, "Управляет пользователями и метриками", "HTTPS")
+Rel(source, bma, "Передаёт данные продаж", "CSV / Excel / API")
+Rel(bma, email, "Отправляет уведомления", "SMTP")
+@enduml
