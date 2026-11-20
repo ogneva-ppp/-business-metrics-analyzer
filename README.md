@@ -34,3 +34,19 @@ python main.py
 - Средняя выручка
 - Рентабельность, %
 - Рост выручки, %
+
+## Работа с базой данных
+
+По умолчанию используется SQLite. Для PostgreSQL задайте DATABASE_URL в файле .env.
+
+pip install -r requirements.txt
+
+alembic upgrade head          # применить миграции
+
+python -m scripts.seed_data   # заполнить базу тестовыми данными (Faker.seed(42))
+
+python -m scripts.reset_db    # очистить таблицы перед повторным заполнением
+
+pytest                        # запустить тесты запросов
+
+Описание схемы и ER-диаграмма: docs/database/schema.md
