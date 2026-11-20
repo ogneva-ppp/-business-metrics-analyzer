@@ -35,18 +35,33 @@ python main.py
 - Рентабельность, %
 - Рост выручки, %
 
-## Работа с базой данных
+# Работа с базой данных
 
-По умолчанию используется SQLite. Для PostgreSQL задайте DATABASE_URL в файле .env.
+По умолчанию используется SQLite. Для PostgreSQL задайте `DATABASE_URL` в файле `.env`.
 
+Установка зависимостей и применение миграций:
+
+```
 pip install -r requirements.txt
+alembic upgrade head
+```
 
-alembic upgrade head          # применить миграции
+Заполнение базы тестовыми данными (`Faker.seed(42)`, данные воспроизводимы):
 
-python -m scripts.seed_data   # заполнить базу тестовыми данными (Faker.seed(42))
+```
+python -m scripts.seed_data
+```
 
-python -m scripts.reset_db    # очистить таблицы перед повторным заполнением
+Очистка таблиц перед повторным заполнением:
 
-pytest                        # запустить тесты запросов
+```
+python -m scripts.reset_db
+```
 
-Описание схемы и ER-диаграмма: docs/database/schema.md
+Запуск тестов запросов:
+
+```
+pytest
+```
+
+Описание схемы и ER-диаграмма: [docs/database/schema.md](docs/database/schema.md)
